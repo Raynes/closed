@@ -27,7 +27,8 @@ class ClosedView extends View
     text = @editor.getText()
     if text
       tilde text, (file) =>
-        if fs.existsSync(file) && fs.lstatSync(file).isFile()
+        if fs.existsSync(file)
+          @file = file
           @good()
         else
           @bad()
@@ -50,12 +51,13 @@ class ClosedView extends View
     @editor.onDidChange @onChange
 
     @command 'core:confirmed', =>
-      if @canOpen
-        text = @editor.getText()
-        tilde text, (file) -> atom.workspaceView.open(file)
+      stat = fs.lstatSync(@file)
+      if @canOpen && stat.isFile()
+        atom.workspace.open(@file)
         @panel.hide()
-      else
-        console.log "File didn't exist."
+      if @canOpen && stat.isDirectory()
+        atom.open pathsToOpen: [@file]
+        @panel.hide()
 
     @command 'core:cancel', =>
       @panel.hide()
