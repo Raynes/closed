@@ -1,7 +1,7 @@
 {
   "name": "closed",
   "main": "./lib/closed",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Interactively open files and directories.",
   "activationCommands": {
     "atom-workspace": "closed:Open File"
