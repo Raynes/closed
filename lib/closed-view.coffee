@@ -16,6 +16,7 @@ class ClosedView extends SelectListView
     text = @editor.getText()
     if text
       tilde text, (file) =>
+        @file = file
         dir = if _s.endsWith(file, path.sep) then file else path.dirname(file)
         if fs.existsSync(dir)
           # Resolved to remove any trailing slashes.
@@ -40,28 +41,42 @@ class ClosedView extends SelectListView
     @editor = @filterEditorView.getModel()
     @editor.onDidChange @onChange
 
-    @addClass('overlay from-top')
+    @addClass('overlay from-top closed-editor')
     atom.workspaceView.append(this)
 
     atom.commands.add 'atom-workspace', 'closed:Open File': @show
+    atom.commands.add '.closed-editor', 'closed:Open Current': @justOpen
 
   destroy: ->
     @remove()
 
-  @restoreFocus: ->
+  cancel: ->
+    super
+    @panel.hide()
 
   viewForItem: ({basename}) ->
     "<li>#{basename}</li>"
 
+  existsAndIsDir: (file) ->
+    if fs.existsSync(file)
+      fs.lstatSync(file).isDirectory()
+
+  justOpen: =>
+    if @existsAndIsDir(@file)
+      atom.open pathsToOpen: [@file], newWindow: true
+    else
+      atom.workspace.open(@file)
+    @cancel()
+    @panel.hide()
+
   confirmed: ({basename, dir}) =>
     file = path.join(dir, basename)
-    stat = fs.lstatSync(file)
-    if stat.isFile()
+    if @existsAndIsDir(file)
+      @editor.setText(file + path.sep)
+    else
       atom.workspace.open(file)
       @cancel()
       @panel.hide()
-    if stat.isDirectory()
-      @editor.setText(file + path.sep)
 
   show: =>
     @panel ?= atom.workspace.addModalPanel(item: this)
