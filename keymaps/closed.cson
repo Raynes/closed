@@ -7,11 +7,11 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
-'.platform-darwin, .workspace':
+'.platform-darwin':
   'ctrl-cmd-p': 'closed:Open File'
-'.platform-linux, .workspace':
-  'ctrl-alt-p': 'closed:Open File'
-'.platform-darwin, .closed atom-text-editor[mini]':
+'.platform-linux':
+  'alt-ctrl-p': 'closed:Open File'
+'.platform-darwin .closed-editor atom-text-editor[mini]':
   'cmd-enter': 'closed:Open Current'
-'.platform-linux, .closed atom-text-editor[mini]':
+'.platform-linux .closed-editor atom-text-editor[mini]':
   'ctrl-enter': 'closed:Open Current'
