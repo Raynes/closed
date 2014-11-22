@@ -2,7 +2,7 @@
   "name": "closed",
   "main": "./lib/closed",
   "version": "0.2.0",
-  "description": "Open files with paths.",
+  "description": "Interactively open files and directories.",
   "activationCommands": {
     "atom-workspace": "closed:Open File"
   },
