@@ -1,8 +1,16 @@
-# closed package
+# closed
 
-Open files with paths in Atom
+Closed is a basic approximation of Emacs's ido-mode for opening files and
+directories. It'll pop open a panel similar to the command palette and will
+give you possible completions as you type paths. It'll also expand ~ for you.
 
-![Closed](http://raynes.me/hfiles/goodclosed.png)
+**Opening Closed**
+* `cmd-ctrl-p` (`alt-ctrl-p` on Linux): Open a file.
 
-Basically, ya just type in a path and press enter and it'll open it for you.
-Pretty simple.
+**While In Closed**
+* `enter`: If the current selection is a file then open it otherwise complete
+  the current path.
+* `cmd-enter` (`ctrl-center` on Linux): Open current path. If it's an existing
+  directory, open in a new atom window, otherwise create a file.
+
+![Closed](http://raynes.me/hfiles/goodclosed2.png)
