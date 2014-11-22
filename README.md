@@ -8,7 +8,7 @@ give you possible completions as you type paths. It'll also expand ~ for you.
 * `cmd-ctrl-p` (`alt-ctrl-p` on Linux): Open a file.
 
 **While In Closed**
-* `enter`: If the current selection is a file then open it otherwise complete
+* `enter` (or `tab`): If the current selection is a file then open it otherwise complete
   the current path.
 * `cmd-enter` (`ctrl-center` on Linux): Open current path. If it's an existing
   directory, open in a new atom window, otherwise create a file.
