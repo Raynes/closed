@@ -63,7 +63,7 @@ class ClosedView extends SelectListView
 
   justOpen: =>
     if @existsAndIsDir(@file)
-      atom.open pathsToOpen: [@file], newWindow: true
+      atom.open pathsToOpen: [@file] #, newWindow: true
     else
       atom.workspace.open(@file)
     @cancel()
