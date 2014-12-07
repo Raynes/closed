@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "space-pen": "^4.2.2",
-    "atom-space-pen-views": "^0.14.0",
+    "atom-space-pen-views": "^0.20.0",
     "tilde-expansion": "0.0.0",
     "underscore.string": "^2.4.0"
   }
