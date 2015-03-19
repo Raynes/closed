@@ -17,3 +17,4 @@
   'ctrl-enter': 'closed:Open Current'
 '.closed-editor atom-text-editor[mini]':
   'tab': 'core:confirm'
+  'backspace': 'closed:Delete Filename'
