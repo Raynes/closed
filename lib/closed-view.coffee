@@ -45,7 +45,7 @@ class ClosedView extends SelectListView
 
     atom.commands.add 'atom-workspace', 'closed:Open File': @show
     atom.commands.add '.closed-editor', 'closed:Open Current': @justOpen
-    atom.commands.add '.closed-editor', 'closed:Delete Filename': @deleteFilename
+    atom.commands.add '.closed-editor', 'closed:Delete Filename': @deleteFileNameCommand
 
   destroy: ->
     @remove()
@@ -70,14 +70,18 @@ class ClosedView extends SelectListView
     @panel.hide()
 
   # Remove the last level, file or directory, from the filter path
-  deleteFilename: =>
-    currentPath = @editor.getText()
+  deleteFilename: (path) ->
     newPath = ""
-    
-    matches = currentPath.match /(.*\/).+/
+    matches = path.match /(.*\/).+/
     if matches?
       [_, newPath] = matches
+    return newPath
+
+  deleteFileNameCommand: =>
+    currentPath = @editor.getText()
+    newPath = @deleteFilename(currentPath)
     @editor.setText(newPath)
+
 
 
   confirmed: ({basename, dir}) =>
@@ -94,7 +98,7 @@ class ClosedView extends SelectListView
     @panel.show()
     currentPath = atom.workspace.getActiveTextEditor()?.buffer?.file?.path;
     if(currentPath?)
-      @editor.setText(currentPath)
+      @editor.setText(@deleteFilename(currentPath))
 
     @storeFocusedElement()
     @focusFilterEditor()
