@@ -90,7 +90,7 @@ class ClosedView extends SelectListView
     @panel ?= atom.workspace.addModalPanel(item: this)
     @panel.show()
     currentPath = atom.workspace.getActiveTextEditor()?.buffer?.file?.path;
-    if(currentPath?)
+    if currentPath?
       @editor.setText(path.dirname(currentPath) + path.sep)
     else
       tilde '~', (home) =>
