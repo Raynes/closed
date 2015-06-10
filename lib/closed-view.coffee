@@ -40,8 +40,8 @@ class ClosedView extends SelectListView
     @editor = @filterEditorView.getModel()
     @editor.onDidChange @onChange
 
-    @addClass('overlay from-top closed-editor')
-    atom.workspaceView.append(this)
+    @addClass('overlay closed-editor')
+    atom.workspace.addTopPanel item: this
 
     atom.commands.add 'atom-workspace', 'closed:Open File': @show
     atom.commands.add '.closed-editor', 'closed:Open Current': @justOpen
